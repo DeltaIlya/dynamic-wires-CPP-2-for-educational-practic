@@ -9,13 +9,14 @@
 #include <map>
 #include <algorithm>
 #include <numeric>
-#include <iostream>
 #include <climits>
 #include <functional>
 #include <iomanip>
+#include <cmath>
 
 using std::cout;
 using std::endl;
+using std::cin;
 using std::vector;
 using std::map;
 using std::pair;
@@ -30,11 +31,18 @@ using SolutionVector = vector<vector<int>>;
 // Функция ввода
 void Input_data(vector<int>& wires, vector<int>& task, int& minRemainder);
 
-// Функция вывода
+// Функция вывода результата
 void Output_solution(vector<vector<int>>& solution);
 
 /// <summary>
-/// Вывод таблицы проводов в консоль
+/// Функция компактной конвертации числа в строку
+/// </summary>
+/// <param name="s">- десятичное число умноженное на 1000</param>
+/// <returns></returns>
+string num_to_str(int s);
+
+/// <summary>
+/// Функция вывода вектора проводов в консоль
 /// </summary>
 /// <param name="vector">- множество проводов (в виде вектора)</param>
 /// <param name="caption">- наименование множества</param>

@@ -1,41 +1,18 @@
 ﻿#include "header.h"
 
-void printVector(vector<int> vector, string caption)
-{
-	int size = caption.size();
-	cout << caption << ": ";
-	if (vector.empty())
-		cout << "[НЕТ ДАННЫХ]";
-	else
-	{
-		std::sort(vector.begin(), vector.end());
-		int count = 0; std::map<int, int> mapWire;
-		for (auto element : vector) mapWire[element]++;
-
-		auto it = mapWire.begin();
-		cout << it->first << "м - " << it->second << "шт.";
-		if (mapWire.size() > 1)
-		{
-			it++;
-			for (; it != mapWire.end(); it++)
-			{
-				cout << ";\n" << setw(size + 2) << "" << it->first << "м - " << it->second << "шт.";
-			}
-		}
-	}
-	cout << endl;
-}
-
 static void parseNumber(const std::string& s, int& length, int& count)
 {
 	// Находим позицию разделителя 'x' (регистронезависимо)
-	if (s.find('x') == s.find('X'))
+	if (s.find('x') == s.find('X')) // смысл такого условия в том, что при в одном и том же месте не могут хранится два разных символа и срабатывает если возвращаются std::string::npos
 	{
 		// Если разделитель 'x' не найден, обрабатываем всю строку как длину,
 		// а количество устанавливаем в 1
 		std::string string = s;
 		std::replace(string.begin(), string.end(), ',', '.');
-		length = std::stoi(string);
+
+		
+		float fl = std::stof(string);
+		length = fl * 1000;
 		count = 1;
 	}
 	else
@@ -47,7 +24,8 @@ static void parseNumber(const std::string& s, int& length, int& count)
 
 		// Парсим длину (заменяем запятые на точки и преобразуем в float)
 		std::replace(string_before_x.begin(), string_before_x.end(), ',', '.');
-		length = std::stoi(string_before_x);
+		float fl = std::stof(string_before_x);
+		length = round(fl * 1000);
 
 		// Парсим количество (заменяем запятые на точки и преобразуем в int)
 		std::replace(string_after_x.begin(), string_after_x.end(), ',', '.');
@@ -70,7 +48,7 @@ static void Input_string_to_vector_int(vector<int>& vector)
 		try
 		{
 			parseNumber(token, length, count);
-			if (!count || !length) continue;
+			if (length <= 0 || count <= 0) continue;
 			for (int i = 0; i < count; i++) vector.push_back(length);
 		}
 		catch (...) {}
@@ -86,7 +64,7 @@ static void Input_string_to_int(int& number)
 	try
 	{
 		std::replace(line.begin(), line.end(), ',', '.');
-		number = std::stoi(line);
+		number = std::stof(line) * 1000;
 	}
 	catch (...) { number = 0; }
 }
@@ -139,8 +117,8 @@ void Input_data(vector<int>& wires, vector<int>& task, int& minRemainder)
 		printVector(wires, "Исходные длины");
 		printVector(task, "Необходимые длины");
 	 
-		if (minRemainder == 0) cout << "Делать расчёт без учёта остатка?" << endl;
-		else cout << "Делать расчёт с учётом минимального остатка: " << minRemainder << "?";
+		if (minRemainder == 0) cout << "Делать расчёт без учёта остатка?";
+		else cout << "Делать расчёт с учётом минимального остатка: " << num_to_str(minRemainder) << "?";
 		cout << " [Y/N]: "; getline(cin, answer);
 	} while (!(answer[0] == 'Y' || answer[0] == 'y' || answer[0] == 'Н' || answer[0] == 'н' || answer[0] == '\0'));
 	system("cls");

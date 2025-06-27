@@ -1,7 +1,7 @@
 ﻿#include "header.h"
 
 
-bool find_best_set
+static bool find_best_set
 (
     int capacity,
     const vector<int>& targets,
@@ -29,13 +29,14 @@ bool find_best_set
     return found;
 }
 
-bool solve
+static bool solve
 (
     const vector<int>& sources,
     const vector<int>& targets,
     int srcIdx,
     vector<bool>& used,
-    SolutionVector& answer)
+    SolutionVector& answer
+)
 {
     if (std::all_of(used.begin(), used.end(), [](bool x) {return x; })) return true;
     if (srcIdx >= sources.size()) return false;
@@ -72,7 +73,12 @@ bool solve
     return false;
 }
 
-SolutionVector WireCutter(vector<int> source_wires, vector<int> target_wires, int min_remainder)
+static SolutionVector WireCutter
+(
+    vector<int> source_wires,
+    vector<int> target_wires,
+    int min_remainder
+)
 {
     SolutionVector solution;
     std::sort(source_wires.begin(), source_wires.end(), std::less<int>());
@@ -83,7 +89,7 @@ SolutionVector WireCutter(vector<int> source_wires, vector<int> target_wires, in
     solve(source_wires, target_wires, 0, used, answer);
     if (answer.empty()) return SolutionVector();
 
-    for (auto cuts : answer) if (cuts[0] == std::accumulate(++cuts.begin(), cuts.end(), 0)) solution.push_back(cuts);
+    for (auto& cuts : answer) if (cuts[0] == std::accumulate(++cuts.begin(), cuts.end(), 0)) solution.push_back(cuts);
     if (answer == solution) return solution;
 
     vector<int> new_source_wires = source_wires, new_target_wires = target_wires;
@@ -127,7 +133,7 @@ int main()
         printVector(source_wires, "Исходные длины");
         printVector(target_wires, "Необходимые длины");
 
-        if (min_remainder) std::cout << "Минимально допустимый остаток: " << min_remainder << std::endl;
+        if (min_remainder) std::cout << "Минимально допустимый остаток: " << num_to_str(min_remainder) << std::endl;
         SolutionVector solution = WireCutter(source_wires, target_wires, min_remainder);
         Output_solution(solution);
 
