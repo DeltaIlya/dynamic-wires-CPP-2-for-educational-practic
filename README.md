@@ -38,3 +38,15 @@
 > Если не вводить ничего, это считается подтверждением. Любой другой ответ будет равнозначен отмене.
 
 ---
+
+## Пример работы программы
+
+1. Вводим длины и количество исходных проводов ![image](https://github.com/user-attachments/assets/92bbd305-d1ea-4a4e-8070-ef112eb7d5ea) ![image](https://github.com/user-attachments/assets/8ebba889-14e6-4099-86bc-5cb24f68fe4a)
+2. Далее вводим длины и количество проводов, которые нужно получить в результате резки ![image](https://github.com/user-attachments/assets/de117d1e-7ac9-4d53-9a7d-8cc0686217da) ![image](https://github.com/user-attachments/assets/f1993f0a-c05a-4824-9170-fc02d41674ad)
+3. В конце вводим минимально допустимый остаток ![image](https://github.com/user-attachments/assets/32bfdb83-fb11-47e2-836b-420136c0e772) ![image](https://github.com/user-attachments/assets/a4a8b654-78b8-4a33-a14a-6fd56ace4d56)
+4. Итого программа посчитала самый оптимальный способ резки с учётом остатка ![image](https://github.com/user-attachments/assets/5a8073d6-ddec-42d5-9199-572da152242d)
+
+
+
+
+
