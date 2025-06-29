@@ -10,7 +10,7 @@ static void parseNumber(const std::string& s, int& length, int& count)
 		std::string string = s;
 		std::replace(string.begin(), string.end(), ',', '.');
 
-		
+
 		float fl = std::stof(string);
 		length = fl * 1000;
 		count = 1;
@@ -36,15 +36,15 @@ static void parseNumber(const std::string& s, int& length, int& count)
 static void Input_string_to_vector_int(vector<int>& vector)
 {
 	vector.clear();
-    string line;
-    string token;
+	string line;
+	string token;
 	int length;
 	int count;
 
-    getline(cin, line, '\n');
-    istringstream iss(line);
-    while (iss >> token)
-    {
+	getline(cin, line, '\n');
+	istringstream iss(line);
+	while (iss >> token)
+	{
 		try
 		{
 			parseNumber(token, length, count);
@@ -52,7 +52,7 @@ static void Input_string_to_vector_int(vector<int>& vector)
 			for (int i = 0; i < count; i++) vector.push_back(length);
 		}
 		catch (...) {}
-    }
+	}
 	sort(vector.begin(), vector.end());
 }
 
@@ -114,7 +114,7 @@ void Input_data(vector<int>& wires, vector<int>& task, int& minRemainder)
 		}
 	} while (!(answer[0] == 'Y' || answer[0] == 'y' || answer[0] == 'Н' || answer[0] == 'н' || answer[0] == '\0'));
 	answer = "n";
-	
+
 	do
 	{
 		system("cls");
@@ -125,7 +125,7 @@ void Input_data(vector<int>& wires, vector<int>& task, int& minRemainder)
 		system("cls");
 		printVector(wires, "Исходные длины");
 		printVector(task, "Необходимые длины");
-	 
+
 		if (minRemainder == 0) cout << "Делать расчёт без учёта остатка?";
 		else cout << "Делать расчёт с учётом минимального остатка: " << num_to_str(minRemainder) << "?";
 		cout << " [Y/N]: "; getline(cin, answer);
