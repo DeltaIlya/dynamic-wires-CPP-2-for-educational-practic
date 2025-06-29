@@ -65,6 +65,7 @@ static void Input_string_to_int(int& number)
 	{
 		std::replace(line.begin(), line.end(), ',', '.');
 		number = std::stof(line) * 1000;
+		number = number > 0 ? number : 0;
 	}
 	catch (...) { number = 0; }
 }
@@ -79,7 +80,11 @@ void Input_data(vector<int>& wires, vector<int>& task, int& minRemainder)
 		Input_string_to_vector_int(wires);
 		system("cls");
 
-		if (wires.size() == 0) cout << "Длины проводов указаны неверно..." << endl;
+		if (wires.size() == 0)
+		{
+			cout << "Длины проводов указаны неверно..." << endl << endl << endl;
+			system("pause");
+		}
 		else
 		{
 			printVector(wires, "Исходные длины");
@@ -97,7 +102,11 @@ void Input_data(vector<int>& wires, vector<int>& task, int& minRemainder)
 		system("cls");
 		printVector(wires, "Исходные длины");
 
-		if (wires.size() == 0) cout << "Длины проводов указаны неверно..." << endl;
+		if (task.size() == 0)
+		{
+			cout << "Длины проводов указаны неверно..." << endl << endl << endl;
+			system("pause");
+		}
 		else
 		{
 			printVector(task, "Необходимые длины");
